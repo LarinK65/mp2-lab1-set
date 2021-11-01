@@ -295,3 +295,16 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(awful_set, conjunction_with_negation_is_empty_set)
+{
+	TSet s(10);
+	TSet copy_s(s);
+
+	s.InsElem(1);
+	s.InsElem(5);
+	s.InsElem(7);
+	s.InsElem(8);
+
+	ASSERT_TRUE((s * ~s) == copy_s);
+}

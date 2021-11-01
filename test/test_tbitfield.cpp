@@ -309,3 +309,22 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+#include <sstream>
+
+TEST(awful_bitfield, can_enter_output)
+{
+    TBitField b(5);
+    b.SetBit(1);
+    b.SetBit(4);
+
+    stringstream sstr;
+
+    sstr << b;
+
+    TBitField b1(uint32_t(INT32_MIN) * 2);
+
+    sstr >> b1;
+
+    ASSERT_TRUE(b == b1);
+}
